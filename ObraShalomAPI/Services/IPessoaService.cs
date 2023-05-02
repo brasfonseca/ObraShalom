@@ -9,8 +9,8 @@ namespace ObraShalomAPI.Services
     public interface IPessoaService
     {
         Task<IEnumerable<Pessoa>> GetPessoas();
-        Task<Pessoa> GetPessoasById(int id);
-        Task<IEnumerable<Pessoa>> GetPessoasByNome(string nome);
+        Task<Pessoa> GetPessoaPorId(int id);
+        Task<IEnumerable<Pessoa>> GetPessoasPorNome(string nome);
         Task CreatePessoa(Pessoa pessoa);
         Task UpdatePessoa(Pessoa pessoa);
         Task DeletePessoa(Pessoa pessoa);

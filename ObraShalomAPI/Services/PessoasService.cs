@@ -43,13 +43,13 @@ namespace ObraShalomAPI.Services
             }
         }
 
-        public async Task<Pessoa> GetPessoasById(int id)
+        public async Task<Pessoa> GetPessoaPorId(int id)
         {
             var pessoa = await _context.Pessoas.FindAsync(id);
             return pessoa;
         }
 
-        public async Task<IEnumerable<Pessoa>> GetPessoasByNome(string nome)
+        public async Task<IEnumerable<Pessoa>> GetPessoasPorNome(string nome)
         {
             IEnumerable<Pessoa> pessoas;
             if(!string.IsNullOrWhiteSpace(nome))
