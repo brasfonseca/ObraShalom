@@ -69,5 +69,59 @@ namespace ObraShalomAPI.Controllers
                 return BadRequest("Request inválido");
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create (Pessoa pessoa)
+        {
+            try
+            {
+                await _pessoaService.CreatePessoa(pessoa);
+                return CreatedAtRoute(nameof(GetPessoa), new { id = pessoa.Id }, pessoa);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Request inválido");
+            }
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Edit(int id, [FromBody] Pessoa pessoa)
+        {
+            try
+            {
+                if (pessoa.Id == id)
+                {
+                    await _pessoaService.UpdatePessoa(pessoa);
+                    return Ok($"Pessoa com id = {id} foi atualizada com sucesso");
+                }
+                else
+                    return NotFound($"Pessoa com id = {id} não encontrada");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Request inválido");
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var p = await _pessoaService.GetPessoaPorId(id);
+
+                if (p != null && p.Id >0)
+                {   
+                    await _pessoaService.DeletePessoa(p);
+                    return Ok($"Pessoa com id = {id} foi desativada com sucesso");
+                }
+                else
+                    return NotFound($"Pessoa com id = {id} não encontrada");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Request inválido");
+            }
+        }
     }
 }
